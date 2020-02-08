@@ -43,13 +43,13 @@ async function start() {
           }
         if (userAnswerHL === "l") {
           maxGuess = computerGuess
-          console.log(minGuess, maxGuess)
+          //console.log(minGuess, maxGuess)
           computerGuess = Math.floor((minGuess + maxGuess) / 2) 
           guessCount.push(computerGuess) 
         } 
         if (userAnswerHL === "h") {
           minGuess = computerGuess
-          console.log(minGuess, maxGuess)    
+          //console.log(minGuess, maxGuess)    
           computerGuess = Math.floor((minGuess + maxGuess) / 2)
           guessCount.push(computerGuess)
         }
