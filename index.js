@@ -6,13 +6,17 @@ function ask(questionText) {
     rl.question(questionText, resolve);
   });
 }
-
-start();
-
+start()
+// Lee Peters
 async function start() {
   console.log("Let's play a game where you (human) make up a number and I (computer) try to guess it.")
   let secretNumber = await ask("What is your secret number?\nI won't peek, I promise...\n");
   console.log('You entered: ' + secretNumber);
-  // Now try and complete the program.
+  
   process.exit();
+}
+
+function randNumGen() {
+  let randNum =  Math.round(Math.random() * (100 - 1 ) + 1);
+  return randNum;
 }
