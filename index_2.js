@@ -16,9 +16,9 @@ start()
 
 async function start() {
   console.log("Let's play a game where you (human) make up a number between 0 and 100 and I (computer) try to guess it.")
-  let secretNumber = await ask("What is your secret number?\nI won't peek, I promise...\n"); 
+  let secretNumber = parseInt(await ask("What is your secret number?\nI won't peek, I promise...\n")); 
   console.log('You entered: ' + secretNumber);
-
+  // console.log(typeof(secretNumber)) testing input
   let computerGuess = randNumGen(minGuess, maxGuess)
 
   let userAnswerYN = await ask('Is your secret number ' +computerGuess+'?') // assign user input 
@@ -28,7 +28,7 @@ async function start() {
 
     if (userAnswerYN === "y") {
         console.log('I win! And I guessed in ' + guessCount.length + pluralOrnot)
-        } // if computer guesses in a sinlge try
+        } // if computer guesses in a single try
 
   while (userAnswerYN !== "y") {
       let userAnswerHL = await ask('Is it higher or lower?') // assign user input > higher or lower than guess
