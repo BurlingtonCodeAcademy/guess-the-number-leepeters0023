@@ -1,4 +1,6 @@
-/*const readline = require('readline');
+/* DISREGARD - first test file, see index_2
+
+const readline = require('readline');
 const rl = readline.createInterface(process.stdin, process.stdout);
 
 function ask(questionText) {
