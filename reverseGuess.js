@@ -7,59 +7,77 @@ function ask(questionText) {
   });
 } 
 
+// | - - - starter code - do not change above - - - |
+
 let guessLog = [] // keep track of guess count and previous guesses
-let min = 0
-let max = 10
-let computerNum = randNumGen(min, max)
+let min = 0 // initialize min
+let max = 10 // initialize max
+let computerNum = randNumGen(min, max) // initialize random number
+
+// | - - - initialize game  - - - |
 
 start()
 
 async function start() {
   console.log("Let's play a game where I (computer) pick a number between 1 and 10 and you (human) try to guess it.")
-  let userNum = parseInt(await ask("Ready? Enter your first guess to begin\n"));
-  // console.log(typeof(userNum)) // test input type
-    if (typeof(userNum) === NaN) { // check input type
-    console.log("Please start over and enter a whole number between 1 and 10")
-    process.exit(); // for later
-    } else if (userNum < min || userNum > max) { // check input range
+
+  let userNum = parseInt(await ask("Ready? Enter your first guess to begin\n"))
+
+// | - - - guard clauses  - - - |
+
+  if (typeof(userNum) === NaN) { // check input type 
     console.log("Please start over and enter a whole number between 1 and 10")
     process.exit();
-   }
+  } 
+    
+  else if (userNum < min || userNum > max) { // check input range
+    console.log("Please start over and enter a whole number between 1 and 10")
+    process.exit();
+  }
 
-    guessLog.push(userNum)
-    // console.log(computerNum) // test output
+    guessLog.push(userNum) // track previous guesses 
   
-    if (userNum == computerNum) { // using loose comparison here due to unexpexted type coersion 
-      console.log("Congrats, that's it!")
+  if (userNum == computerNum) { // using loose comparison in case of unexpected type coersion
+    console.log("Congrats, that's it!")
+    process.exit()
+  }
+
+  while (userNum !== computerNum) {
+    let userNum = parseInt(await ask("Sorry, try again\n"))
+
+    if (userNum === NaN) { // check for Nan 
+      console.log("Please start over and enter a whole number between 1 and 10")
+      process.exit();
+     } 
+      
+    else if (userNum < min || userNum > max) { // check input range
+        console.log("Please start over and enter a whole number between 1 and 10")
+        process.exit();
+    }
+
+    else if (userNum === computerNum) {
+      console.log("Congrats, that's it! It took this many tries: " + guessLog.length)
       process.exit()
     }
 
-  while (userNum !== computerNum) {
-    let userNum = parseInt(await ask("Sorry, try again\n"));
-    console.log(typeof(userNum));
-    if (userNum === NaN) {
-      console.log("Please start over and enter a whole number between 1 and 10")
-      process.exit();
-      } else if (userNum < min || userNum > max) { // check input range
-        console.log("Please start over and enter a whole number between 1 and 10")
-        process.exit();
-        }
-        if (userNum === computerNum) {
-          console.log("Congrats, that's it!")
-          process.exit()
-          }
-  guessLog.push(userNum)
-  guessLog.sort() 
-  console.log(guessLog)
-  let guessTest = (guessLog.indexOf(userNum))
-      //if (guessTest > 0) {
-      //console.log("You already guessed " + userNum + ", try again")
-      //}
-      // to work on later
+    // track, sort, and test previous guesses 
+    guessLog.push(userNum)
+    guessLog.sort() 
+    guessTest(userNum)
+      }
     } 
-  }
 
-function randNumGen(min, max) { // generates random number within range (inclusive high end)
+// | - - - process functions - do not change below  - - - |
+
+// func to return random integer (inclusive on both ends)
+function randNumGen(min, max) { 
   let randNum =  Math.floor(Math.random() * (max - min + 1)) + min + 1
   return randNum;
+}
+
+// func to test if a number has already been guessed 
+function guessTest (num) {
+      if (guessLog.includes(num) === true) {
+      console.log("You already guessed " + num + ", try again")
+      }
 }
